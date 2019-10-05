@@ -1,14 +1,13 @@
 /*
  * rosserial Publisher Example
  * Prints "hello world!"
- * This intend to connect to an Arduino Ethernet Shield
- * and a rosserial socket server.
- * You can launch the rosserial socket server with
- * roslaunch rosserial_server socket.launch
- * The default port is 11411
+ * This intend modified from an example which uses Arduino Ethernet Shield
+ * to use the Particle Photon wifi module instead.
+ * You still need a rosserial socket server.
+ * 
+ * Modified from https://github.com/ros-drivers/rosserial/tree/melodic-devel/rosserial_arduino/src/ros_lib/examples/TcpHelloWorld
  *
  */
-// #include <SPI.h> // serial
 
 // To use the TCP version of rosserial_arduino
 #define ROSSERIAL_ARDUINO_TCP
@@ -37,22 +36,18 @@ void publishChar(const char *eventName, const char *data)
   Particle.publish(eventName, data,  PRIVATE);
 }
 
-void publishChar(const char *eventName)
-{
-  Particle.publish(eventName,  PRIVATE);
-}
 
 void setup()
 {
   
   // Connect the Ethernet
-  // Ethernet.begin(mac, ip);
+  // typically not needed as this is default behaviour
   WiFi.on();
   WiFi.connect();
 
   
 
-  // Let some time for the Ethernet Shield to be initialized
+  // Let some time for the network to be initialized
   delay(1000);
   char IP[] = "xxx.xxx.xxx.xxx";
   IPAddress ip = WiFi.localIP();
@@ -68,7 +63,7 @@ void setup()
   ip = (nh.getHardware()->getLocalIP());
   ip.toString().toCharArray(IP, 16);
 
-  publishChar("another way",  IP);
+  publishChar("another way to get IP",  IP);
 
   // Start to be polite
   nh.advertise(chatter);
@@ -81,12 +76,12 @@ void loop()
     last_time = millis();
     if (nh.connected())
     {
-      publishChar("Connected");
+      publishChar("Connected", "");
       // Say hello
       str_msg.data = hello;
       chatter.publish( &str_msg );
     } else {
-      publishChar("Not Connected");
+      publishChar("Not Connected", "");
     }
   }
   nh.spinOnce();
