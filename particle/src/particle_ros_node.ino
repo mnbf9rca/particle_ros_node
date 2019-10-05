@@ -18,7 +18,7 @@
 
 
 // Set the rosserial socket server IP address
-IPAddress server(192,168,17,28);
+IPAddress server(192,168,17,29);
 // Set the rosserial socket server port
 const uint16_t serverPort = 11311;
 

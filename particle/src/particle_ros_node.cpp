@@ -3,7 +3,7 @@
 /******************************************************/
 
 #include "application.h"
-#line 1 "/Users/rob/Downloads/git/particle_ros_node/src/particle_ros_node.ino"
+#line 1 "/Users/rob/Downloads/git/particle_ros_node/particle/src/particle_ros_node.ino"
 /*
  * rosserial Publisher Example
  * Prints "hello world!"
@@ -21,7 +21,7 @@ void publishChar(const char *eventName, const char *data);
 void publishChar(const char *eventName);
 void setup();
 void loop();
-#line 14 "/Users/rob/Downloads/git/particle_ros_node/src/particle_ros_node.ino"
+#line 14 "/Users/rob/Downloads/git/particle_ros_node/particle/src/particle_ros_node.ino"
 #define ROSSERIAL_ARDUINO_TCP
 
 #include <ros.h>
@@ -29,7 +29,7 @@ void loop();
 
 
 // Set the rosserial socket server IP address
-IPAddress server(192,168,17,28);
+IPAddress server(192,168,17,29);
 // Set the rosserial socket server port
 const uint16_t serverPort = 11311;
 
